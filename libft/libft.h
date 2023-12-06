@@ -345,6 +345,17 @@ int				ft_atoi(const char *str);
  */
 void			*ft_calloc(size_t nmemb, size_t size);
 
+
+/**
+ * @brief Allocates memory from the 'ptr' to the size 'size', if the 'ptr' 
+ * are allocated it's a simple malloc otherwise the fonction will 
+ * allocated size from the start of the array 'ptr'.
+ * @param ptr the start of the memory.
+ * @param size The numbers of elements.
+ * @return Return a pointer to the allocated memory or NULL if case of error.
+ */
+void			*ft_realloc(void *ptr, size_t size)
+
 /******************************************************************************/
 /*                                                                            */
 /* IO                                                                         */
