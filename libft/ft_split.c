@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	result_len(char const *str, char c)
+static int	result_len(char const *str, char c)
 {
 	int	i;
 	int	result;
@@ -35,7 +35,7 @@ int	result_len(char const *str, char c)
 	return (result);
 }
 
-char	*cut(char const *str, char sep, int start)
+static char	*cut(char const *str, char sep, int start)
 {
 	int		len;
 	char	*result;
@@ -61,6 +61,14 @@ char	*cut(char const *str, char sep, int start)
 	return (result);
 }
 
+static char	**free_error(char **split, int start)
+{
+	while (start >= 0)
+		free(split[start--]);
+	free(split);
+	return (NULL);
+}
+
 char	**ft_split(char const *str, char sep)
 {
 	int		len;
@@ -79,6 +87,8 @@ char	**ft_split(char const *str, char sep)
 		while (str[i] && str[i] == sep)
 			i++;
 		result[j] = cut(str, sep, i);
+		if (!result[j])
+			return (free_error(result, j - 1));
 		j++;
 		while (str[i] && str[i] != sep)
 			i++;
